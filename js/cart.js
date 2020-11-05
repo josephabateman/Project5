@@ -30,11 +30,7 @@ inputValidation(city, 3, 40);
 inputValidation(postcode, 8, 8);
 
 
-let contactObject;
-submitButton.addEventListener('click', function(submit) {
-    submit.preventDefault()
-    //create contact object
-     contactObject = {
+let contactObject = {
         firstName: firstName.value,
         lastName: lastName.value,
         email: email.value,
@@ -42,18 +38,10 @@ submitButton.addEventListener('click', function(submit) {
         city: city.value,
         postcode: postcode.value    
     }
-    
-    //create array of id strings
-    
-})
-
-
-//
 
 //cartArr holds all cart info
 const cartArr = [];
 const cartTotalPrice = [];
-
 let idStrings = [];
 
 //api get
@@ -215,8 +203,11 @@ const callApi = async (ApiToCall) => {
                 emptyMessage.innerHTML = `Cart is Empty. Please choose some items!`
                 document.getElementById('cart-number').appendChild(emptyMessage)
             }
-
-
+            
+//console.log(cartArr)
+//console.log(idStrings)
+//console.log(contactObject)
+            
         } else {
             throw new Error('We couldn\'t generate our product page right now. Please try later')
         }
@@ -230,5 +221,17 @@ callApi('http://localhost:3000/api/' + apiName);
 
 //end of api get call
 
-const api = 'http://localhost:3000/api/teddies/order';
 
+(async () => {
+  const rawResponse = await fetch('http://localhost:3000/api/cameras/order', {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({a: contactObject, b: idStrings})
+  });
+  const content = await rawResponse.json();
+
+  console.log(content);
+})();
