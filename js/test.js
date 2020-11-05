@@ -13,7 +13,7 @@
 //xhr.open('POST', url);
 //xhr.send(data);
 
-const api = 'http://localhost:3000/api/teddies/order
+const api = 'http://localhost:3000/api/teddies/order';
 
 function makeRequest() {
   return new Promise((resolve, reject) => {
