@@ -9,17 +9,17 @@ const postcode = document.getElementById('postcode');
 const submitButton = document.getElementById('submit');
 
 function inputValidation(element, greaterThan, lessThan) {
-  element.addEventListener('input', function(element) {
-    if (element.target.value.length >= greaterThan && element.target.value.length <= lessThan) {
-        submitButton.removeAttribute('disabled');
-//        nested if statements isNaN - below line doesn't work
-        if (element === firstName || element === lastName && isNaN(element.target.value)) {
-            submitButton.setAttribute('disabled', 'true');
+    element.addEventListener('input', function (element) {
+        if (element.target.value.length >= greaterThan && element.target.value.length <= lessThan) {
+            submitButton.removeAttribute('disabled');
+            //        nested if statements isNaN - below line doesn't work
+            if (element === firstName || element === lastName && isNaN(element.target.value)) {
+                submitButton.setAttribute('disabled', 'true');
             }
         } else {
-        submitButton.setAttribute('disabled', 'true');
+            submitButton.setAttribute('disabled', 'true');
         }
-  })  
+    })
 }
 
 inputValidation(firstName, 2, 15);
@@ -31,13 +31,13 @@ inputValidation(postcode, 8, 8);
 
 
 let contactObject = {
-        firstName: firstName.value,
-        lastName: lastName.value,
-        email: email.value,
-        fAddress: fAddress.value,
-        city: city.value,
-        postcode: postcode.value    
-    }
+    firstName: firstName.value,
+    lastName: lastName.value,
+    email: email.value,
+    fAddress: fAddress.value,
+    city: city.value,
+    postcode: postcode.value
+}
 
 //cartArr holds all cart info
 const cartArr = [];
@@ -115,11 +115,11 @@ const callApi = async (ApiToCall) => {
                         cartTotalPrice.push(totalsTimesQuantities)
                     }
                     calculateTotals()
-                    
+
                     //push id strings to array
                     idStrings.push(cartArr[i].id)
-                   
-                    
+
+
 
                     //building quantity value below
                     //                    console.log(selectQuantity = parseInt(cartArr[i].quantity))
@@ -146,7 +146,7 @@ const callApi = async (ApiToCall) => {
                         //                        const qty = document.getElementById('cart-quantity')
                         //create cart object and default behaviour submit onclick
 
-                        quantityVal.onchange = function(option) {
+                        quantityVal.onchange = function (option) {
                             option.preventDefault();
 
                             //create order object which will be added to array via localStaorage
@@ -185,7 +185,7 @@ const callApi = async (ApiToCall) => {
                     const emptyCart = document.createElement('button')
                     emptyCart.innerHTML = 'remove all items from cart'
                     displayPrice.appendChild(emptyCart)
-                    emptyCart.onclick = function() {
+                    emptyCart.onclick = function () {
                         let yes = confirm("This will delete all products in your cart. Click 'ok' to confirm or 'cancel' to go back");
                         if (yes == true) {
                             localStorage.clear();
@@ -203,11 +203,11 @@ const callApi = async (ApiToCall) => {
                 emptyMessage.innerHTML = `Cart is Empty. Please choose some items!`
                 document.getElementById('cart-number').appendChild(emptyMessage)
             }
-            
-//console.log(cartArr)
-//console.log(idStrings)
-//console.log(contactObject)
-            
+
+            //console.log(cartArr)
+            //console.log(idStrings)
+            //console.log(contactObject)
+
         } else {
             throw new Error('We couldn\'t generate our product page right now. Please try later')
         }
@@ -223,15 +223,18 @@ callApi('http://localhost:3000/api/' + apiName);
 
 
 (async () => {
-  const rawResponse = await fetch('http://localhost:3000/api/cameras/order', {
-    method: 'POST',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({a: contactObject, b: idStrings})
-  });
-  const content = await rawResponse.json();
+    const rawResponse = await fetch('http://localhost:3000/api/cameras/order', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            a: contactObject,
+            b: idStrings
+        })
+    });
+    const content = await rawResponse.json();
 
-  console.log(content);
+    console.log(content);
 })();

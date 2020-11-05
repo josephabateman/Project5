@@ -76,7 +76,7 @@ const callApi = async (ApiToCall) => {
                 const qty = document.getElementById('qty')
                 //create cart object and default behaviour submit onclick
                 const addToCart = document.getElementById('addToCart')
-                addToCart.addEventListener('click', function(option) {
+                addToCart.addEventListener('click', function (option) {
                     option.preventDefault();
                     location.reload();
 
@@ -96,7 +96,7 @@ const callApi = async (ApiToCall) => {
                 });
             }
             cartObject();
-            
+
 
         } else {
             throw new Error('We couldn\'t generate our product page right now. Please try later')

@@ -1,57 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <link rel="stylesheet" href="css/style.css">
     <meta charset="UTF-8">
     <title>Cart</title>
 </head>
+
 <body>
     <div id="cart-number"></div>
-    
+
     <div class="container">
-      <form>
+        <form>
 
-        <label for="fname">First Name</label>
-        <input type="text" id="fname" name="firstname">
+            <label for="fname">First Name</label>
+            <input type="text" id="fname" name="firstname">
 
-        <label for="lname">Last Name</label>
-        <input type="text" id="lname" name="lastname">
-          
-        <label for="email">Email</label>
-        <input type="text" id="email" name="email" placeholder="youremail@...">
-          
-        <label for="first-line-address">First Line of Address</label>
-        <input type="text" id="first-line-address" name="first-line-address" placeholder="67 Barnet Drive...">
-          
-        <label for="city">City</label>
-        <input type="text" id="city" name="city">
+            <label for="lname">Last Name</label>
+            <input type="text" id="lname" name="lastname">
 
-        <label for="country">Country</label>
-        <select id="country" name="country">
-          <option value="australia">United Kingdom</option>
-          <option value="canada">Canada</option>
-          <option value="usa">USA</option>
-        </select>
-          
-        <label for="postcode">Postcode</label>
-        <input type="text" id="postcode" name="postcode">
+            <label for="email">Email</label>
+            <input type="text" id="email" name="email" placeholder="youremail@...">
 
-        <input type="submit" id="submit" value="Submit" disabled>
+            <label for="first-line-address">First Line of Address</label>
+            <input type="text" id="first-line-address" name="first-line-address" placeholder="67 Barnet Drive...">
 
-      </form>
+            <label for="city">City</label>
+            <input type="text" id="city" name="city">
+
+            <label for="country">Country</label>
+            <select id="country" name="country">
+                <option value="australia">United Kingdom</option>
+                <option value="canada">Canada</option>
+                <option value="usa">USA</option>
+            </select>
+
+            <label for="postcode">Postcode</label>
+            <input type="text" id="postcode" name="postcode">
+
+            <input type="submit" id="submit" value="Submit" disabled>
+
+        </form>
     </div>
-    
+
     <table id="populate-table">
-      <tr>
-        <th></th>
-        <th>Product</th>
-        <th>Option</th> 
-        <th>Price</th>
-        <th>Quantity</th>
-      </tr>
+        <tr>
+            <th></th>
+            <th>Product</th>
+            <th>Option</th>
+            <th>Price</th>
+            <th>Quantity</th>
+        </tr>
     </table>
-    
+
     <script src="js/global-scripts.js"></script>
     <script src="js/cart.js"></script>
 </body>
+
 </html>
