@@ -94,6 +94,9 @@ const callApi = async (ApiToCall) => {
                         localStorage.setItem(localStKey, JSON.stringify(cartObject));
                     }
                 });
+                //this line is the problem
+//                localStorage.setItem('id', JSON.stringify(jsonResponse._id));
+
             }
             cartObject();
 

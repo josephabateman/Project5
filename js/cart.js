@@ -27,15 +27,6 @@ inputValidation(address, 10, 40);
 inputValidation(city, 3, 40);
 inputValidation(email, 7, 40);
 
-let contact = {
-    firstName: firstName.value,
-    lastName: lastName.value,
-    address: address.value,
-    city: city.value,
-    email: email.value,
-
-}
-
 //cartArr holds all cart info
 const cartArr = [];
 const cartTotalPrice = [];
@@ -116,8 +107,6 @@ const callApi = async (ApiToCall) => {
                     //push id strings to array
                     idStrings.push(cartArr[i].id)
 
-
-
                     //building quantity value below
                     //                    console.log(selectQuantity = parseInt(cartArr[i].quantity))
 
@@ -193,7 +182,6 @@ const callApi = async (ApiToCall) => {
                 emptyCartFunc()
 
 
-
             } else {
                 document.getElementById('populate-table').style.visibility = "hidden";
                 const emptyMessage = document.createElement('h4')
@@ -204,7 +192,7 @@ const callApi = async (ApiToCall) => {
             //console.log(cartArr)
             //console.log(idStrings)
             //console.log(contactObject)
-
+            
         } else {
             throw new Error('We couldn\'t generate our product page right now. Please try later')
         }
@@ -218,20 +206,40 @@ callApi('http://localhost:3000/api/' + apiName);
 
 //end of api get call
 
+/* the contact form below will eventually take following form:
+firstName: firstName.value,
+            lastName: lastName.value,
+            address: address.value,
+            city: city.value,
+            email: email.value,
+*/
 
-(async () => {
+//let newArr = [];
+//let new = localStorage.getItem(id)
+//console.log(new)
+
+const post = async () => {
+    const body = {
+        contact: {
+            firstName: 'firstName.value',
+            lastName: 'lastName.value',
+            address: 'address.value',
+            city: 'city.value',
+            email: 'email.value',
+        },
+        //id strings is not working - console says there is nothing
+        products: idStrings
+    };
     const rawResponse = await fetch('http://localhost:3000/api/cameras/order', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
-            contact: contact,
-            products: idStrings
-        })
+        body: JSON.stringify(body)
     });
     const content = await rawResponse.json();
 
     console.log(content);
-})();
+};
+post()
