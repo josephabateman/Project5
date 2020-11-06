@@ -1,3 +1,6 @@
+//const apiName = require('index.js');
+//console.log(apiName)
+
 function cart() {
     //adds all localStorage object values to an array
     const cartArr = [];
@@ -19,7 +22,7 @@ function cart() {
 
     //adds cartQuantityNums to html pages (make sure each html pages has global-scripts.js)
     const aTag = document.createElement('a')
-    aTag.setAttribute('href', 'cart.html')
+    aTag.href = 'cart.html' + '?apiName=' + 'teddies';
     document.getElementById('cart-number').appendChild(aTag)
     const cartP = document.createElement('p')
     cartP.innerHTML = cartQuantity
@@ -33,6 +36,18 @@ function cart() {
     // console.log(cartQuantity)
 }
 cart();
+
+//const express = require('express');
+//const router = express.Router();
+//
+//const teddyCtrl = require('../controllers/teddy');
+//
+//router.get('/', teddyCtrl.getAllTeddies);
+//router.get('/:id', teddyCtrl.getOneTeddy);
+//router.post('/order', teddyCtrl.orderTeddies);
+//
+//module.exports = router;
+
 
 
 //            //use below 2 lines to test if Array
