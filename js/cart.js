@@ -192,7 +192,7 @@ const callApi = async (ApiToCall) => {
             //console.log(cartArr)
             //console.log(idStrings)
             //console.log(contactObject)
-            
+
         } else {
             throw new Error('We couldn\'t generate our product page right now. Please try later')
         }
@@ -206,17 +206,16 @@ callApi('http://localhost:3000/api/' + apiName);
 
 //end of api get call
 
-/* the contact form below will eventually take following form:
-firstName: firstName.value,
-            lastName: lastName.value,
-            address: address.value,
-            city: city.value,
-            email: email.value,
-*/
 
-//let newArr = [];
-//let new = localStorage.getItem(id)
-//console.log(new)
+
+//below code works perfectly in devtools console. it's something to do with scope
+let productID = [];
+for (let i = 0; i < cartArr.length; i++) {
+    productID.push(cartArr[i].id)
+}
+console.log(productID)
+
+
 
 const post = async () => {
     const body = {
@@ -228,7 +227,7 @@ const post = async () => {
             email: 'email.value',
         },
         //id strings is not working - console says there is nothing
-        products: idStrings
+        products: []
     };
     const rawResponse = await fetch('http://localhost:3000/api/cameras/order', {
         method: 'POST',
