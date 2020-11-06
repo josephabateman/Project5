@@ -1,11 +1,10 @@
 //contact form get elements
 const firstName = document.getElementById('fname');
 const lastName = document.getElementById('lname');
-const email = document.getElementById('email');
-const fAddress = document.getElementById('first-line-address');
+const address = document.getElementById('address');
 const city = document.getElementById('city');
-const country = document.getElementById('country');
-const postcode = document.getElementById('postcode');
+const email = document.getElementById('email');
+
 const submitButton = document.getElementById('submit');
 
 function inputValidation(element, greaterThan, lessThan) {
@@ -24,19 +23,17 @@ function inputValidation(element, greaterThan, lessThan) {
 
 inputValidation(firstName, 2, 15);
 inputValidation(lastName, 4, 20);
-inputValidation(email, 7, 40);
-inputValidation(fAddress, 10, 40);
+inputValidation(address, 10, 40);
 inputValidation(city, 3, 40);
-inputValidation(postcode, 8, 8);
+inputValidation(email, 7, 40);
 
-
-let contactObject = {
+let contact = {
     firstName: firstName.value,
     lastName: lastName.value,
-    email: email.value,
-    fAddress: fAddress.value,
+    address: address.value,
     city: city.value,
-    postcode: postcode.value
+    email: email.value,
+
 }
 
 //cartArr holds all cart info
@@ -230,8 +227,8 @@ callApi('http://localhost:3000/api/' + apiName);
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            a: contactObject,
-            b: idStrings
+            contact: contact,
+            products: idStrings
         })
     });
     const content = await rawResponse.json();
