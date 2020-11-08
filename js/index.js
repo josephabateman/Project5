@@ -3,7 +3,7 @@
 bootstrap
 
 */
-const apiName = 'teddies'
+const apiName = 'cameras'
 
 // AJAX function
 const callApi = async (ApiToCall) => {
