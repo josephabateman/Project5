@@ -105,14 +105,14 @@ if (cartArr.length > 0) {
     let totalPrice = cartTotalPrice.reduce(reducer);
 
     //total price
-    const displayPrice = document.createElement('h4')
+    const displayPrice = document.createElement('h6')
     displayPrice.innerHTML = `Cart Total: $${totalPrice} `
     document.getElementById('populate-table').appendChild(displayPrice)
 
     //empty cart    
     function emptyCartFunc() {
         const emptyCart = document.createElement('button')
-        emptyCart.innerHTML = 'remove all items from cart'
+        emptyCart.innerHTML = 'Empty Cart'
         displayPrice.appendChild(emptyCart)
         emptyCart.onclick = function () {
             let yes = confirm("This will delete all products in your cart. Click 'ok' to confirm or 'cancel' to go back");
@@ -187,7 +187,7 @@ submitButton.onclick = function (event) {
             }
             const reducer = (accumulator, currentValue) => accumulator + currentValue;
             const orderTotalFormatted = orderTotal.reduce(reducer).toFixed(2);
-            
+
             //empty cart
             localStorage.clear()
 

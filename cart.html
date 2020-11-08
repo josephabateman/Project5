@@ -2,51 +2,99 @@
 <html lang="en">
 
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS for styling and layout-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    
     <link rel="stylesheet" href="css/style.css">
-    <meta charset="UTF-8">
+
     <title>Cart</title>
 </head>
 
 <body>
-    <div id="cart-number"></div>
-
     <div class="container">
-        <form>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="index.html"><img id="logo" src="images/logo.png"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="cart.html">Cart <span class="sr-only">(current)</span></a>
+                    </li>
+                </ul>
+            </div>
 
-            <label for="fname">First Name</label>
-            <input type="text" id="fname" name="firstname">
+            <a class="btn btn-primary" id="cart-button" role="button">
+                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-cart3" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
+                </svg>
+                <span id="cart-number"></span>
+            </a>
+        </nav>
 
-            <label for="lname">Last Name</label>
-            <input type="text" id="lname" name="lastname">
-            
-            <label for="address">Address</label>
-            <input type="text" id="address" name="address" placeholder="67 Barnet Drive...">
-            
-              <label for="city">City</label>
-            <input type="text" id="city" name="city">
+        <div class="row">
+            <div class="col d-flex justify-content-center">
+                <table id="populate-table">
+                    <tr>
+                        <th class="col-2"></th>
+                        <th class="col-3">Product</th>
+                        <th class="col-3">Option</th>
+                        <th class="col-2">Price</th>
+                        <th class="col-2">Quantity</th>
+                    </tr>
+                </table>
+            </div>
 
-            <label for="email">Email</label>
-            <input type="text" id="email" name="email" placeholder="youremail@...">
+            <div class="col d-flex justify-content-center">
+                <form>
 
-            <input type="submit" id="submit" value="Submit">
-<!--            i removed 'disabled' from line above-->
+                    <div class="col text-right">
+                        <label for="fname">First Name</label>
+                        <input type="text" id="fname" name="firstname">
+                    </div>
 
-        </form>
+                    <div class="col text-right">
+                        <label for="lname">Last Name</label>
+                        <input type="text" id="lname" name="lastname">
+                    </div>
+
+                    <div class="col text-right">
+                        <label for="address">Address</label>
+                        <input type="text" id="address" name="address" placeholder="67 Barnet Drive...">
+                    </div>
+
+                    <div class="col text-right">
+                        <label for="city">City</label>
+                        <input type="text" id="city" name="city">
+                    </div>
+
+                    <div class="col text-right">
+                        <label for="email">Email</label>
+                        <input type="text" id="email" name="email" placeholder="youremail@...">
+                    </div>
+
+                    <div class="col text-right">
+                        <input type="submit" id="submit" value="Process order">
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+
     </div>
 
-    <table id="populate-table">
-        <tr>
-            <th></th>
-            <th>Product</th>
-            <th>Option</th>
-            <th>Price</th>
-            <th>Quantity</th>
-        </tr>
-    </table>
+    <!--    <div id="cart-number"></div>-->
 
-<!--    <script type="module" src="cart.js"></script>-->
+
+    <!--    <script type="module" src="cart.js"></script>-->
     <script src="js/global-scripts.js"></script>
     <script src="js/cart.js"></script>
-</body>
-
-</html>
+</body></html>

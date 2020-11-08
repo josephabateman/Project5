@@ -21,35 +21,11 @@ function cart() {
     let cartQuantity = cartQuantityNums.reduce(reducer);
 
     //adds cartQuantityNums to html pages (make sure each html pages has global-scripts.js)
-    const aTag = document.createElement('a')
-    aTag.href = 'cart.html' + '?apiName=' + 'teddies';
-    document.getElementById('cart-number').appendChild(aTag)
-    const cartP = document.createElement('p')
-    cartP.innerHTML = cartQuantity
-    aTag.appendChild(cartP)
+    const cartButton = document.getElementById('cart-button');
+    const cartNumber = document.getElementById('cart-number');
+    cartNumber.innerHTML = cartQuantity;
+    cartButton.href = 'cart.html' + '?apiName=' + 'teddies';
 
 
-    //cartArr stores all objects from localStorage in an array. use object notation in the following way to retrieve necessary info for the POST
-    // console.log(cartArr[2].name)
-
-    //number of items in cart
-    // console.log(cartQuantity)
 }
 cart();
-
-//const express = require('express');
-//const router = express.Router();
-//
-//const teddyCtrl = require('../controllers/teddy');
-//
-//router.get('/', teddyCtrl.getAllTeddies);
-//router.get('/:id', teddyCtrl.getOneTeddy);
-//router.post('/order', teddyCtrl.orderTeddies);
-//
-//module.exports = router;
-
-
-
-//            //use below 2 lines to test if Array
-//            const isArray = Array.isArray(objtes);
-//            console.log(isArray);

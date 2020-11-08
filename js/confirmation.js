@@ -1,5 +1,6 @@
 const content = document.getElementById('confirmation')
-const thankYou = document.createElement('h2')
+const thankYou = document.createElement('h4')
+const div = document.createElement('div')
 const totalPrice = document.createElement('p')
 const orderID = document.createElement('p')
 
@@ -12,4 +13,5 @@ thankYou.innerHTML = 'Thank you for shopping with us. We really appreciate your 
 totalPrice.innerHTML = 'Your order total: $' + priceParam
 orderID.innerHTML = 'Your order number: ' + orderIDParam
 
-content.appendChild(thankYou).appendChild(totalPrice).appendChild(orderID)
+content.appendChild(thankYou)
+content.appendChild(div).appendChild(totalPrice).appendChild(orderID)

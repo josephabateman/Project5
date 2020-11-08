@@ -14,10 +14,16 @@ const callApi = async (ApiToCall) => {
 
             for (let i in jsonResponse) {
 
-                //wrap everything in product.html link plus Q-parameter
+                //wrap everything in product.html link plus Q-parameter + bootstrap colums
+                const column = document.createElement('div');
+                column.setAttribute('class', 'col-auto')
+//                column.setAttribute('class', 'column')
+                document.getElementById('populate').appendChild(column)
+
+
                 const productLink = document.createElement('a');
                 productLink.href = 'product.html' + '?productId=' + jsonResponse[i]._id + '&apiName=' + apiName;
-                document.getElementById('populate').appendChild(productLink)
+                column.appendChild(productLink)
 
                 //populate div and add name for attribute id
                 const div = document.createElement('div')
