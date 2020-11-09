@@ -24,7 +24,7 @@ function cart() {
     const cartButton = document.getElementById('cart-button');
     const cartNumber = document.getElementById('cart-number');
     cartNumber.innerHTML = cartQuantity;
-    cartButton.href = 'cart.html' + '?apiName=' + 'teddies';
+    cartButton.href = 'cart.html' + '?apiName=' + 'furniture';
 
 
 }

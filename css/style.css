@@ -4,6 +4,12 @@ img {
 }
 */
 
+
+
+a:hover {
+  text-decoration: none;
+}
+
 #cartImg {
     height: 50px;
 }

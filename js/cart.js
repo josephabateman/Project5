@@ -2,6 +2,11 @@ const cartArr = []; /* cartArr holds all product info */
 const cartTotalPrice = []; /* cartTotalPrice is total price of products */
 let productID = []; /* holds cartArr id strings */
 
+if(cartArr < 1) {
+    alert('Your cart is empty. Please add some items first!')
+   location.href = 'index.html'
+   }
+
 function cart() {
     //adds all localStorage object values to an array
     for (const [key, value] of Object.entries(localStorage)) {
@@ -118,7 +123,7 @@ if (cartArr.length > 0) {
             let yes = confirm("This will delete all products in your cart. Click 'ok' to confirm or 'cancel' to go back");
             if (yes == true) {
                 localStorage.clear();
-                location.reload();
+                location.href = 'index.html';
             }
         }
     }

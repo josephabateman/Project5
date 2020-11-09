@@ -1,6 +1,3 @@
-/*to do
--bootstrap
-*/
 const params = new URLSearchParams(document.location.search);
 const productId = params.get('productId');
 const apiName = params.get('apiName');
@@ -12,66 +9,78 @@ const callApi = async (ApiToCall) => {
         if (response.ok) {
             const jsonResponse = await response.json();
 
-            //populate div and add name for attribute id
-            const div = document.createElement('div')
-            //sets div id and removes spaces
-            div.setAttribute('id', jsonResponse.name.replace(/ /gi, ''))
-            document.getElementById('indiv-product').appendChild(div)
-
-            //populate img & append to div
+            //create elements
             const newImg = document.createElement('IMG');
-            newImg.src = jsonResponse.imageUrl
-            newImg.classList.add('img-fluid')
-            div.appendChild(newImg)
-
-            //populate name & append to div
             const name = document.createElement('h2');
-            name.innerHTML = jsonResponse.name
-            div.appendChild(name)
-
-            //populate description & append to div
             const description = document.createElement('p');
-            description.innerHTML = jsonResponse.description
-            div.appendChild(description)
-
-            //populate price & append to div
-            const correctPrice = jsonResponse.price / 100;
             const price = document.createElement('h3');
-            price.innerHTML = `$${correctPrice.toFixed(2)}`
-            div.appendChild(price)
-
-            //populate dropdown & append to div
-            //i have chosen to populate dropdown from javascript in case the API has no options
-            const optionKey = Object.keys(jsonResponse)[0];
-            const optionValues = Object.values(jsonResponse)[0];
-
+            //create form elements
+            const formDiv = document.createElement('div')
             const form = document.createElement('form');
             const label = document.createElement('label');
             const select = document.createElement('select');
-            const input = document.createElement('input');
+            const addToCart = document.createElement('input');
 
-            //dropdown attributes
+            //ids & remove spaces
+            formDiv.setAttribute('id', jsonResponse.name.replace(/ /gi, ''))
+
+            //bootstrap classes
+            newImg.setAttribute('class', 'img-fluid rounded')
+            name.setAttribute('class', 'font-weight-light')
+            description.setAttribute('class', 'font-weight-light')
+            price.setAttribute('class', 'font-weight-light')
+            //form bootstrap classes
+            formDiv.setAttribute('class', 'col-sm')
+            form.setAttribute('class', '')
+            label.setAttribute('class', 'text-secondary font-weight-light')
+            select.setAttribute('class', 'font-weight-light')
+            addToCart.setAttribute('class', 'align-bottom btn btn-secondary mt-3 ml-2')
+
+            //populate data with json response
+            newImg.src = jsonResponse.imageUrl
+            name.innerHTML = jsonResponse.name
+            description.innerHTML = jsonResponse.description
+            const correctPrice = jsonResponse.price / 100;
+            price.innerHTML = `$${correctPrice.toFixed(2)}`
+
+            //append
+            const imagePopulate = document.getElementById('image-populate')
+            const infoPopulate = document.getElementById('info-populate')
+            const quantityElement = document.getElementById('quantity-element')
+
+            imagePopulate.appendChild(newImg)
+            infoPopulate.appendChild(name)
+            infoPopulate.appendChild(price)
+            infoPopulate.appendChild(description)
+            infoPopulate.appendChild(formDiv)
+//            infoPopulate.appendChild()
+
+            //get options key and value names from API
+            const dropdownKeyName = Object.keys(jsonResponse)[0];
+            const dropdownValues = Object.values(jsonResponse)[0];
+
+            //dropdown attributes - using a form
             form.setAttribute('action', '');
             label.setAttribute('for', 'options');
-            label.innerHTML = `Select ${optionKey} `;
+            label.innerHTML = `Select ${dropdownKeyName} `;
             select.setAttribute('name', 'option');
             select.setAttribute('id', 'option');
-            input.setAttribute('type', 'submit')
-            input.setAttribute('value', 'update cart')
-            input.setAttribute('id', 'addToCart')
-            input.setAttribute('class', 'btn btn-warning')
+            addToCart.setAttribute('type', 'submit')
+            addToCart.setAttribute('value', 'add to cart')
+            addToCart.setAttribute('id', 'addToCart')
 
-            let appendDropdown = div.appendChild(form).appendChild(label).appendChild(select)
+            //append form elements to one another and addToCart button at the end
+            let appendDropdown = formDiv.appendChild(form).appendChild(label).appendChild(select)
 
-            //loop through the different options
-            for (let i of optionValues) {
+            //loop through the different dropdown options
+            for (let i of dropdownValues) {
                 const option = document.createElement('option');
                 option.setAttribute('value', i);
                 option.innerHTML = i;
                 appendDropdown.appendChild(option)
             }
 
-            label.appendChild(input)
+            label.appendChild(quantityElement).appendChild(addToCart)
 
             function cartObject() {
                 //add to cart
@@ -80,7 +89,7 @@ const callApi = async (ApiToCall) => {
                 const addToCart = document.getElementById('addToCart')
                 addToCart.addEventListener('click', function (option) {
                     option.preventDefault();
-                    location.reload();
+                    location.href = 'cart.html';
 
                     //create order object which will be added to array via localStaorage
                     if (qty.value > 0) {
@@ -96,9 +105,6 @@ const callApi = async (ApiToCall) => {
                         localStorage.setItem(localStKey, JSON.stringify(cartObject));
                     }
                 });
-                //this line is the problem
-//                localStorage.setItem('id', JSON.stringify(jsonResponse._id));
-
             }
             cartObject();
 
