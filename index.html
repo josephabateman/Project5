@@ -7,6 +7,8 @@
 
     <!-- Bootstrap CSS for styling and layout-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
     <link rel="stylesheet" href="css/style.css">
 
@@ -37,23 +39,23 @@
             </div>
         </div>
 
-        <div class="row justify-content-md-center">
-            <div class="col-md-9">
-                <div class="thumbnail">
-                    <a href="/w3images/lights.jpg" target="_blank">
-                        <img src="/w3images/lights.jpg" alt="Lights" style="width:100%">
-                        <div class="caption">
-                            <p>Lorem ipsum donec id elit non mi porta gravida at eget metus.</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
+        <div id="populate" class="row justify-content-md-center">
+<!--            product info from api goes here-->
         </div>
 
     </div>
 
+<!--
+    div (class thumbnail). within div there is:
+        a (id link-tag). within a there is:
+            img (id img-tag)
+            div (id caption tag). within div there is:
+                p (id name-tag)
+                p (id price-tag)
+-->
 
-<!--    id="populate"-->
+
+    <!--    id="populate"-->
 
     <div class="container-fluid p-0">
         <a class="btn btn-secondary" id="cart-button" role="button">
@@ -63,13 +65,13 @@
             <span id="cart-number"></span>
         </a>
     </div>
-    
+
     <script src="js/index.js"></script>
     <script src="js/global-scripts.js"></script>
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 
-    
+
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
