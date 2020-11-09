@@ -17,7 +17,7 @@ const callApi = async (ApiToCall) => {
                 //wrap everything in product.html link plus Q-parameter + bootstrap colums
                 const column = document.createElement('div');
                 column.setAttribute('class', 'col-auto')
-//                column.setAttribute('class', 'column')
+                //                column.setAttribute('class', 'column')
                 document.getElementById('populate').appendChild(column)
 
 

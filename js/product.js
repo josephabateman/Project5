@@ -21,6 +21,7 @@ const callApi = async (ApiToCall) => {
             //populate img & append to div
             const newImg = document.createElement('IMG');
             newImg.src = jsonResponse.imageUrl
+            newImg.classList.add('img-fluid')
             div.appendChild(newImg)
 
             //populate name & append to div
@@ -58,6 +59,7 @@ const callApi = async (ApiToCall) => {
             input.setAttribute('type', 'submit')
             input.setAttribute('value', 'update cart')
             input.setAttribute('id', 'addToCart')
+            input.setAttribute('class', 'btn btn-warning')
 
             let appendDropdown = div.appendChild(form).appendChild(label).appendChild(select)
 
