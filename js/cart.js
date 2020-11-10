@@ -2,11 +2,6 @@ const cartArr = []; /* cartArr holds all product info */
 const cartTotalPrice = []; /* cartTotalPrice is total price of products */
 let productID = []; /* holds cartArr id strings */
 
-if(cartArr < 1) {
-    alert('Your cart is empty. Please add some items first!')
-   location.href = 'index.html'
-   }
-
 function cart() {
     //adds all localStorage object values to an array
     for (const [key, value] of Object.entries(localStorage)) {
@@ -31,39 +26,47 @@ function cart() {
 }
 cart();
 
+//redirect to home page if cart is empty
+if (cartArr < 1) {
+    alert('Your cart is empty. Please add some items first!')
+    location.href = 'index.html'
+}
+
 // create the table and populate
 if (cartArr.length > 0) {
+
+    const populateAllInfo = document.getElementById('populate-all-info')
+    
     for (let i = 0; i < cartArr.length; i++) {
-        // Get a reference to the table
-        let tableRef = document.getElementById('populate-table');
 
-        // Insert a row at the end of the table
-        let newRow = tableRef.insertRow(-1);
+        //create elements
+        const bootStrapDiv = document.createElement('div')
+        const newImg = document.createElement('IMG');
+        const name = document.createElement('h4');
+        const productOptions = document.createElement('p');
+        const price = document.createElement('p');
 
-        // Insert a cell in the row at index 0
-        let imageCell = newRow.insertCell(0);
-        let productCell = newRow.insertCell(1);
-        let optionCell = newRow.insertCell(2);
-        let priceCell = newRow.insertCell(3);
-        let quantityCell = newRow.insertCell(4);
+        //bootstrap classes
+        bootStrapDiv.setAttribute('class', 'row p-2 m-2 border')
+        newImg.setAttribute('class', 'col-md-4 img-fluid rounded')
+        name.setAttribute('class', 'font-weight-light px-3')
+        productOptions.setAttribute('class', 'px-2 font-weight-light')
+        price.setAttribute('class', 'font-weight-light')
 
-        //add images to cells  
-        let imageVal = document.createElement('img');
-        imageVal.setAttribute('src', cartArr[i].imageUrl)
-        imageVal.setAttribute('id', 'cartImg')
+        populateAllInfo.appendChild(bootStrapDiv)
+        bootStrapDiv.appendChild(newImg)
+        bootStrapDiv.appendChild(name)
+        bootStrapDiv.appendChild(productOptions)
+        bootStrapDiv.appendChild(price)
 
-        // Append a text node to the cell
-        let productVal = document.createTextNode(cartArr[i].name);
-        let optionsVal = document.createTextNode(cartArr[i].option);
-        let totalVal = document.createTextNode(cartArr[i].price);
-        //                 let quantityVal = document.createTextNode(cartArr[i].quantity);
-        let quantityVal = document.createElement('select');
-        quantityVal.setAttribute('id', 'cart-quantity');
-        imageCell.appendChild(imageVal);
-        productCell.appendChild(productVal);
-        optionCell.appendChild(optionsVal);
-        priceCell.appendChild(totalVal);
-        quantityCell.appendChild(quantityVal);
+        //add json data to each created element
+        newImg.src = cartArr[i].imageUrl
+        name.innerHTML = cartArr[i].name
+        productOptions.innerHTML = cartArr[i].option
+
+        //price populate
+        const correctPrice = cartArr[i].price / 1;
+        price.innerHTML = `$${correctPrice.toFixed(2)}`
 
         function calculateTotals() {
             const totalsAsStrings = parseInt(cartArr[i].price)
@@ -73,6 +76,10 @@ if (cartArr.length > 0) {
         calculateTotals()
 
         //creates dropdown options and pre-selects correct quantity
+        let quantityVal = document.createElement('select');
+        quantityVal.setAttribute('id', 'cart-quantity');
+        quantityVal.setAttribute('class', 'd-block');
+
         for (let j = 1; j < 6; j++) {
             const option = document.createElement('option');
             option.setAttribute('value', j)
@@ -81,6 +88,9 @@ if (cartArr.length > 0) {
             if (j == cartArr[i].quantity) {
                 option.setAttribute('selected', cartArr[i].quantity)
             }
+
+            //make sure to append below to correct place
+            productOptions.appendChild(quantityVal)
             quantityVal.appendChild(option)
         }
 
@@ -112,12 +122,17 @@ if (cartArr.length > 0) {
     //total price
     const displayPrice = document.createElement('h6')
     displayPrice.innerHTML = `Cart Total: $${totalPrice} `
-    document.getElementById('populate-table').appendChild(displayPrice)
+    displayPrice.setAttribute('class', 'mt-3')
+    populateAllInfo.appendChild(displayPrice)
+
 
     //empty cart    
     function emptyCartFunc() {
         const emptyCart = document.createElement('button')
+        emptyCart.setAttribute('class', 'btn btn-danger d-block mt-3')
         emptyCart.innerHTML = 'Empty Cart'
+
+        //make sure to append below to correct place
         displayPrice.appendChild(emptyCart)
         emptyCart.onclick = function () {
             let yes = confirm("This will delete all products in your cart. Click 'ok' to confirm or 'cancel' to go back");
@@ -131,7 +146,7 @@ if (cartArr.length > 0) {
 
 }
 //submit form event
-const submitButton = document.getElementById('submit');
+const submitButton = document.getElementById('submit-button');
 
 //contact form get elements
 const firstName = document.getElementById('fname');
@@ -158,7 +173,6 @@ function passesValidation() {
     }
 }
 
-
 //POST request - submit contact info and array of id strings
 //wrapped inside a submit click event
 submitButton.onclick = function (event) {
@@ -176,7 +190,7 @@ submitButton.onclick = function (event) {
                 },
                 products: productID
             };
-            const rawResponse = await fetch('http://localhost:3000/api/cameras/order', {
+            const rawResponse = await fetch('http://localhost:3000/api/teddies/order', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
@@ -199,6 +213,7 @@ submitButton.onclick = function (event) {
             window.location.href = 'confirmation.html' + '?totalPrice=' + orderTotalFormatted + '&orderID=' + content.orderId;
         };
         post()
+
     } else {
         alert('Did you fill out the fields correctly? Give it another go!')
     }
