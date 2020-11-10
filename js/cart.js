@@ -78,7 +78,7 @@ if (cartArr.length > 0) {
         //creates dropdown options and pre-selects correct quantity
         let quantityVal = document.createElement('select');
         quantityVal.setAttribute('id', 'cart-quantity');
-        quantityVal.setAttribute('class', 'd-block');
+        quantityVal.setAttribute('class', 'd-inline ml-2');
 
         for (let j = 1; j < 6; j++) {
             const option = document.createElement('option');
