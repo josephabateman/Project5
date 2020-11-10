@@ -50,9 +50,9 @@ if (cartArr.length > 0) {
         //bootstrap classes
         bootStrapDiv.setAttribute('class', 'row p-2 m-2 border')
         newImg.setAttribute('class', 'col-md-4 img-fluid rounded')
-        name.setAttribute('class', 'font-weight-light px-3')
-        productOptions.setAttribute('class', 'px-2 font-weight-light')
-        price.setAttribute('class', 'font-weight-light')
+        name.setAttribute('class', 'font-weight-light px-3 col-4')
+        productOptions.setAttribute('class', 'px-2 font-weight-light col-2')
+        price.setAttribute('class', ' font-weight-light col-2')
         removeItem.setAttribute('class', 'col-12')
         removeItem.setAttribute('href', '')
 

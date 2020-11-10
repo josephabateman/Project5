@@ -62,7 +62,7 @@ const callApi = async (ApiToCall) => {
                 //price populate
                 const correctPrice = jsonResponse[i].price / 100;
                 productPrice.innerHTML = `$${correctPrice.toFixed(2)}`
-                
+
                 //buyButton text
                 buyButton.innerHTML = 'Buy'
 
@@ -72,7 +72,7 @@ const callApi = async (ApiToCall) => {
                 link.appendChild(caption).appendChild(productName)
                 caption.appendChild(productPrice)
                 caption.appendChild(buyButton)
-                
+
 
 
 
