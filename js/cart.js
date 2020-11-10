@@ -36,7 +36,7 @@ if (cartArr < 1) {
 if (cartArr.length > 0) {
 
     const populateAllInfo = document.getElementById('populate-all-info')
-    
+
     for (let i = 0; i < cartArr.length; i++) {
 
         //create elements
@@ -45,6 +45,7 @@ if (cartArr.length > 0) {
         const name = document.createElement('h4');
         const productOptions = document.createElement('p');
         const price = document.createElement('p');
+        const removeItem = document.createElement('a');
 
         //bootstrap classes
         bootStrapDiv.setAttribute('class', 'row p-2 m-2 border')
@@ -52,17 +53,25 @@ if (cartArr.length > 0) {
         name.setAttribute('class', 'font-weight-light px-3')
         productOptions.setAttribute('class', 'px-2 font-weight-light')
         price.setAttribute('class', 'font-weight-light')
+        removeItem.setAttribute('class', 'col-12')
+        removeItem.setAttribute('href', '')
+
 
         populateAllInfo.appendChild(bootStrapDiv)
         bootStrapDiv.appendChild(newImg)
         bootStrapDiv.appendChild(name)
         bootStrapDiv.appendChild(productOptions)
         bootStrapDiv.appendChild(price)
+        bootStrapDiv.appendChild(removeItem)
 
         //add json data to each created element
         newImg.src = cartArr[i].imageUrl
         name.innerHTML = cartArr[i].name
         productOptions.innerHTML = cartArr[i].option
+
+        //local storage value for removeItem
+        removeItem.innerHTML = 'Delete'
+        removeItem.value = Object.keys(localStorage)[i]
 
         //price populate
         const correctPrice = cartArr[i].price / 1;
@@ -113,6 +122,23 @@ if (cartArr.length > 0) {
             };
         }
         updateLocalStorageQuantity();
+
+
+        //remove item from cart    
+        function removeItemFunction() {
+            //make sure to append below to correct place
+            removeItem.onclick = function () {
+                if (removeItem.value === Object.keys(localStorage)[i]) {
+                    let yes = confirm("This will remove the item from your cart. Click 'ok' to confirm or 'cancel' to go back");
+                    if (yes == true) {
+                        localStorage.removeItem(removeItem.value);
+                        location.reload();
+                    }
+                }
+            }
+        }
+        removeItemFunction()
+
     }
 
     //reduces cartQuantityNums to a single calculated number
@@ -124,7 +150,6 @@ if (cartArr.length > 0) {
     displayPrice.innerHTML = `Cart Total: $${totalPrice} `
     displayPrice.setAttribute('class', 'mt-3')
     populateAllInfo.appendChild(displayPrice)
-
 
     //empty cart    
     function emptyCartFunc() {
