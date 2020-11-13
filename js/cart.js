@@ -215,7 +215,7 @@ submitButton.onclick = function (event) {
                 },
                 products: productID
             };
-            const rawResponse = await fetch('http://localhost:3000/api/teddies/order', {
+            const rawResponse = await fetch('http://localhost:3000/api/cameras/order', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
@@ -224,6 +224,7 @@ submitButton.onclick = function (event) {
                 body: JSON.stringify(body)
             });
             const content = await rawResponse.json();
+//            console.log(content)
 
             const orderTotal = []
             for (let i = 0; i < cartArr.length; i++) {
