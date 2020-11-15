@@ -2,6 +2,10 @@ const params = new URLSearchParams(document.location.search);
 const productId = params.get('productId');
 const apiName = params.get('apiName');
 
+//cart href
+const cartButton = document.getElementById('cart-button');
+cartButton.href = 'cart.html' + '?apiName=' + apiName;
+
 // AJAX function
 const callApi = async (ApiToCall) => {
     try {
@@ -53,7 +57,7 @@ const callApi = async (ApiToCall) => {
             infoPopulate.appendChild(price)
             infoPopulate.appendChild(description)
             infoPopulate.appendChild(formDiv)
-//            infoPopulate.appendChild()
+            //            infoPopulate.appendChild()
 
             //get options key and value names from API
             const dropdownKeyName = Object.keys(jsonResponse)[0];
@@ -89,7 +93,7 @@ const callApi = async (ApiToCall) => {
                 const addToCart = document.getElementById('addToCart')
                 addToCart.addEventListener('click', function (option) {
                     option.preventDefault();
-                    location.href = 'cart.html';
+                    location.href = 'cart.html' + '?apiName=' + apiName;
 
                     //create order object which will be added to array via localStaorage
                     if (qty.value > 0) {

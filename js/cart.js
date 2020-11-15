@@ -2,6 +2,10 @@ const cartArr = []; /* cartArr holds all product info */
 const cartTotalPrice = []; /* cartTotalPrice is total price of products */
 let productID = []; /* holds cartArr id strings */
 
+const params = new URLSearchParams(document.location.search);
+const apiName = params.get('apiName');
+console.log(apiName)
+
 function cart() {
     //adds all localStorage object values to an array
     for (const [key, value] of Object.entries(localStorage)) {
@@ -215,7 +219,7 @@ submitButton.onclick = function (event) {
                 },
                 products: productID
             };
-            const rawResponse = await fetch('http://localhost:3000/api/teddies/order', {
+            const rawResponse = await fetch('http://localhost:3000/api/' + apiName + '/order', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
@@ -224,7 +228,7 @@ submitButton.onclick = function (event) {
                 body: JSON.stringify(body)
             });
             const content = await rawResponse.json();
-//            console.log(content)
+            //            console.log(content)
 
             const orderTotal = []
             for (let i = 0; i < cartArr.length; i++) {

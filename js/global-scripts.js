@@ -1,6 +1,3 @@
-//const apiName = require('index.js');
-//console.log(apiName)
-
 function cart() {
     //adds all localStorage object values to an array
     const cartArr = [];
@@ -19,13 +16,10 @@ function cart() {
     //reduces cartQuantityNums to a single calculated number
     const reducer = (accumulator, currentValue) => accumulator + currentValue;
     let cartQuantity = cartQuantityNums.reduce(reducer);
-
+    
     //adds cartQuantityNums to html pages (make sure each html pages has global-scripts.js)
     const cartButton = document.getElementById('cart-button');
     const cartNumber = document.getElementById('cart-number');
     cartNumber.innerHTML = cartQuantity;
-    cartButton.href = 'cart.html' + '?apiName=' + 'cameras';
-
-
 }
 cart();
