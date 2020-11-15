@@ -3,7 +3,7 @@
 bootstrap
 
 */
-const apiName = 'cameras'
+const apiName = 'furniture'
 
 // AJAX function
 const callApi = async (ApiToCall) => {
@@ -45,7 +45,7 @@ const callApi = async (ApiToCall) => {
 
                 //link URL
                 link.href = 'product.html' + '?productId=' + jsonResponse[i]._id + '&apiName=' + apiName
-                
+
                 //cart href
                 const cartButton = document.getElementById('cart-button');
                 cartButton.href = 'cart.html' + '?apiName=' + apiName;
