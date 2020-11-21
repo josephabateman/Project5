@@ -18,48 +18,46 @@ const callApi = async (ApiToCall) => {
             const name = document.createElement('h2');
             const description = document.createElement('p');
             const price = document.createElement('h3');
-            //create form elements
+            //create drop down
             const formDiv = document.createElement('div')
             const form = document.createElement('form');
             const label = document.createElement('label');
             const select = document.createElement('select');
             const addToCart = document.createElement('input');
 
-            //ids & remove spaces
-            formDiv.setAttribute('id', jsonResponse.name.replace(/ /gi, ''))
+            //form id and remove spaces if name has spaces
+            //            formDiv.setAttribute('id', jsonResponse.name.replace(/ /gi, ''))
 
             //bootstrap classes
             newImg.setAttribute('class', 'img-fluid rounded')
             name.setAttribute('class', 'font-weight-light')
             description.setAttribute('class', 'font-weight-light')
             price.setAttribute('class', 'font-weight-light')
-            //form bootstrap classes
+            //dropdown bootstrap classes
             formDiv.setAttribute('class', 'col-sm')
             form.setAttribute('class', '')
             label.setAttribute('class', 'text-secondary font-weight-light')
             select.setAttribute('class', 'font-weight-light')
             addToCart.setAttribute('class', 'align-bottom btn btn-secondary mt-3 ml-2')
 
-            //populate data with json response
+            //populate placeholder elements with json response (no loop necessary)
             newImg.src = jsonResponse.imageUrl
             name.innerHTML = jsonResponse.name
             description.innerHTML = jsonResponse.description
             const correctPrice = jsonResponse.price / 100;
             price.innerHTML = `$${correctPrice.toFixed(2)}`
 
-            //append
+            //append elements to each other
             const imagePopulate = document.getElementById('image-populate')
             const infoPopulate = document.getElementById('info-populate')
             const quantityElement = document.getElementById('quantity-element')
-
             imagePopulate.appendChild(newImg)
             infoPopulate.appendChild(name)
             infoPopulate.appendChild(price)
             infoPopulate.appendChild(description)
             infoPopulate.appendChild(formDiv)
-            //            infoPopulate.appendChild()
 
-            //get options key and value names from API
+            //get options key and value names from API (see line 67 and 78)
             const dropdownKeyName = Object.keys(jsonResponse)[0];
             const dropdownValues = Object.values(jsonResponse)[0];
 
@@ -76,7 +74,7 @@ const callApi = async (ApiToCall) => {
             //append form elements to one another and addToCart button at the end
             let appendDropdown = formDiv.appendChild(form).appendChild(label).appendChild(select)
 
-            //loop through the different dropdown options
+            //populate dropdown options in a loop 
             for (let i of dropdownValues) {
                 const option = document.createElement('option');
                 option.setAttribute('value', i);
@@ -84,8 +82,10 @@ const callApi = async (ApiToCall) => {
                 appendDropdown.appendChild(option)
             }
 
+            //append "add to cart" button to quantity label
             label.appendChild(quantityElement).appendChild(addToCart)
 
+            //add to cart functionality wrapped in a function
             function cartObject() {
                 //add to cart
                 const qty = document.getElementById('qty')

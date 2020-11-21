@@ -1,32 +1,20 @@
-const cartArr = []; /* cartArr holds all product info */
-const cartTotalPrice = []; /* cartTotalPrice is total price of products */
+const cartArr = []; /* cartArr holds all items added to cart */
+const cartTotalPrice = []; /* cartTotalPrice is total price of products added together */
 let productID = []; /* holds cartArr id strings */
 
 const params = new URLSearchParams(document.location.search);
 const apiName = params.get('apiName');
-console.log(apiName)
 
+//functionality to add items to cartArr and productID
 function cart() {
-    //adds all localStorage object values to an array
+    //adds all localStorage object values to cartArr
     for (const [key, value] of Object.entries(localStorage)) {
         cartArr.push(JSON.parse(value))
     }
-
+    //adds string of ids from cartArr to productArr which gets submitted in POST call at end
     for (let i = 0; i < cartArr.length; i++) {
         productID.push(cartArr[i].id)
     }
-
-    //loops through the cartArr objects, gets total quantity of items and adds those numbers to cartQuantityNums array
-    let cartQuantityNums = [0]
-    for (let i = 0; i < cartArr.length; i++) {
-        if (cartArr[i].quantity) {
-            cartQuantityNums.push(parseInt(cartArr[i].quantity))
-        }
-    }
-
-    //reduces cartQuantityNums to a single calculated number
-    const reducer = (accumulator, currentValue) => accumulator + currentValue;
-    let cartQuantity = cartQuantityNums.reduce(reducer);
 }
 cart();
 
@@ -145,23 +133,23 @@ if (cartArr.length > 0) {
 
     }
 
-    //reduces cartQuantityNums to a single calculated number
+    //reduces totalPrice to a single calculated number
     const reducer = (accumulator, currentValue) => accumulator + currentValue;
     let totalPrice = cartTotalPrice.reduce(reducer);
 
-    //total price
+    //display and append totalPrice
     const displayPrice = document.createElement('h6')
     displayPrice.innerHTML = `Cart Total: $${totalPrice} `
     displayPrice.setAttribute('class', 'mt-3')
     populateAllInfo.appendChild(displayPrice)
 
-    //empty cart    
+    //emptyCart function
     function emptyCartFunc() {
         const emptyCart = document.createElement('button')
         emptyCart.setAttribute('class', 'btn btn-danger d-block mt-3')
         emptyCart.innerHTML = 'Empty Cart'
 
-        //make sure to append below to correct place
+        //append emptyCart function
         displayPrice.appendChild(emptyCart)
         emptyCart.onclick = function () {
             let yes = confirm("This will delete all products in your cart. Click 'ok' to confirm or 'cancel' to go back");
@@ -174,7 +162,8 @@ if (cartArr.length > 0) {
     emptyCartFunc()
 
 }
-//submit form event
+
+//create submit bitton
 const submitButton = document.getElementById('submit-button');
 
 //contact form get elements
@@ -183,7 +172,6 @@ const lastName = document.getElementById('lname');
 const address = document.getElementById('address');
 const city = document.getElementById('city');
 const email = document.getElementById('email');
-
 
 //form validation
 function ValidateEmail(mail) {
@@ -202,11 +190,10 @@ function passesValidation() {
     }
 }
 
-//POST request - submit contact info and array of id strings
+//POST request - submit shipping info and array of id strings
 //wrapped inside a submit click event
 submitButton.onclick = function (event) {
     event.preventDefault();
-
     if (passesValidation()) {
         const post = async () => {
             const body = {
@@ -228,7 +215,6 @@ submitButton.onclick = function (event) {
                 body: JSON.stringify(body)
             });
             const content = await rawResponse.json();
-            //            console.log(content)
 
             const orderTotal = []
             for (let i = 0; i < cartArr.length; i++) {
@@ -237,9 +223,10 @@ submitButton.onclick = function (event) {
             const reducer = (accumulator, currentValue) => accumulator + currentValue;
             const orderTotalFormatted = orderTotal.reduce(reducer).toFixed(2);
 
-            //empty cart
+            //empty cart - happens once successfully submitted
             localStorage.clear()
 
+            //URL params added to confirmation page to be displayed
             window.location.href = 'confirmation.html' + '?totalPrice=' + orderTotalFormatted + '&orderID=' + content.orderId;
         };
         post()
@@ -247,5 +234,4 @@ submitButton.onclick = function (event) {
     } else {
         alert('Did you fill out the fields correctly? Give it another go!')
     }
-
 }
