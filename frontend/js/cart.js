@@ -45,9 +45,8 @@ if (cartArr.length > 0) {
         name.setAttribute('class', 'font-weight-light px-3 col-4')
         productOptions.setAttribute('class', 'px-2 font-weight-light col-2')
         price.setAttribute('class', ' font-weight-light col-2')
-        removeItem.setAttribute('class', 'col-12')
+        removeItem.setAttribute('class', 'col-12 text-danger')
         removeItem.setAttribute('href', '')
-
 
         populateAllInfo.appendChild(bootStrapDiv)
         bootStrapDiv.appendChild(newImg)
@@ -182,9 +181,33 @@ function ValidateEmail(mail) {
 }
 
 function passesValidation() {
-    if (firstName.value != '' && lastName.value != '' &&
-        ValidateEmail(email.value) != false && address.value != '' && city.value != '') {
+    if (firstName.value != '' && lastName.value != '' && city.value != '' && ValidateEmail(email.value) != false && address.value != '' && city.value != '') {
         return true
+    } else if (firstName.value == '') {
+        firstName.className += " alert alert-danger";
+        firstName.placeholder = 'FIRST NAME MUST NOT BE BLANK';
+        return false;
+    } else if (lastName.value == '') {
+        lastName.className += " alert alert-danger";
+        lastName.placeholder = 'LAST NAME MUST NOT BE BLANK';
+        return false;
+    } else if (lastName.value == '') {
+        lastName.className += " alert alert-danger";
+        lastName.placeholder = 'LAST NAME MUST NOT BE BLANK';
+        return false;
+    } else if (address.value == '') {
+        address.className += " alert alert-danger";
+        address.placeholder = 'PLEASE ENTER YOUR ADDRESS';
+        return false;
+    } else if (city.value == '') {
+        city.className += " alert alert-danger";
+        city.placeholder = 'CITY MUST NOT BE BLANK';
+        return false;
+    }  
+    else if (ValidateEmail(email.value) == false) {
+        email.className += " alert alert-danger";
+        email.placeholder = 'PLEASE FILL OUT EMAIL ADDRESS CORRECTLY';
+        return false;
     } else {
         return false;
     }
@@ -232,6 +255,6 @@ submitButton.onclick = function (event) {
         post()
 
     } else {
-        alert('Did you fill out the fields correctly? Give it another go!')
+        console.error('unknown error')
     }
 }

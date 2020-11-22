@@ -1,9 +1,4 @@
-/*to do
-
-bootstrap
-
-*/
-const apiName = 'furniture'
+const apiName = 'cameras'
 
 // AJAX function
 const callApi = async (ApiToCall) => {
@@ -34,8 +29,8 @@ const callApi = async (ApiToCall) => {
                 buyButton.setAttribute('id', 'buy-button')
 
                 //bootstrap classes
-                bootstrapClass.setAttribute('class', 'col-md-4')
-                thumbnail.setAttribute('class', 'btn btn-light thumbnail m-3 p-0 rounded')
+                bootstrapClass.setAttribute('class', 'col-md-4 mw-100 p-4')
+                thumbnail.setAttribute('class', 'h-100 btn btn-light thumbnail m-3 p-0 rounded')
                 link.setAttribute('class', '')
                 productImage.setAttribute('class', 'img-fluid d-inline-block rounded-top')
                 caption.setAttribute('class', 'p-3')
