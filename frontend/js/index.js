@@ -1,4 +1,4 @@
-const apiName = 'cameras'
+const apiName = 'teddies'
 
 // AJAX function
 const callApi = async (ApiToCall) => {

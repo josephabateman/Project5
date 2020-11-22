@@ -1,3 +1,4 @@
+// get query params
 const params = new URLSearchParams(document.location.search);
 const productId = params.get('productId');
 const apiName = params.get('apiName');

@@ -162,9 +162,6 @@ if (cartArr.length > 0) {
 
 }
 
-//create submit bitton
-const submitButton = document.getElementById('submit-button');
-
 //contact form get elements
 const firstName = document.getElementById('fname');
 const lastName = document.getElementById('lname');
@@ -212,6 +209,9 @@ function passesValidation() {
         return false;
     }
 }
+
+//create submit bitton
+const submitButton = document.getElementById('submit-button');
 
 //POST request - submit shipping info and array of id strings
 //wrapped inside a submit click event
