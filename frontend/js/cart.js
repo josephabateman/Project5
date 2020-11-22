@@ -41,7 +41,7 @@ if (cartArr.length > 0) {
 
         //bootstrap classes
         bootStrapDiv.setAttribute('class', 'row p-2 m-2 border')
-        newImg.setAttribute('class', 'col-md-6 col-lg-4 img-fluid rounded')
+        newImg.setAttribute('class', 'h-100 col-md-6 col-lg-4 img-fluid rounded')
         name.setAttribute('class', 'font-weight-light px-3 col-4')
         productOptions.setAttribute('class', 'px-2 font-weight-light col-2')
         price.setAttribute('class', ' font-weight-light col-2')
@@ -68,7 +68,7 @@ if (cartArr.length > 0) {
         const correctPrice = cartArr[i].price / 1;
         price.innerHTML = `$${correctPrice.toFixed(2)}`
 
-        function calculateTotals() {
+        const calculateTotals = () => {
             const totalsAsStrings = parseInt(cartArr[i].price)
             const totalsTimesQuantities = totalsAsStrings * cartArr[i].quantity
             cartTotalPrice.push(totalsTimesQuantities)
@@ -94,7 +94,7 @@ if (cartArr.length > 0) {
             quantityVal.appendChild(option)
         }
 
-        function updateLocalStorageQuantity() {
+        const updateLocalStorageQuantity = () => {
             quantityVal.onchange = function (option) {
                 option.preventDefault();
                 if (quantityVal.value > 0) {
@@ -116,9 +116,9 @@ if (cartArr.length > 0) {
 
 
         //remove item from cart    
-        function removeItemFunction() {
+        const removeItemFunction = () => {
             //make sure to append below to correct place
-            removeItem.onclick = function () {
+            removeItem.onclick = () => {
                 if (removeItem.value === Object.keys(localStorage)[i]) {
                     let yes = confirm("This will remove the item from your cart. Click 'ok' to confirm or 'cancel' to go back");
                     if (yes == true) {
@@ -143,14 +143,14 @@ if (cartArr.length > 0) {
     populateAllInfo.appendChild(displayPrice)
 
     //emptyCart function
-    function emptyCartFunc() {
+    const emptyCartFunc = () => {
         const emptyCart = document.createElement('button')
         emptyCart.setAttribute('class', 'btn btn-danger d-block mt-3')
         emptyCart.innerHTML = 'Empty Cart'
 
         //append emptyCart function
         displayPrice.appendChild(emptyCart)
-        emptyCart.onclick = function () {
+        emptyCart.onclick = () => {
             let yes = confirm("This will delete all products in your cart. Click 'ok' to confirm or 'cancel' to go back");
             if (yes == true) {
                 localStorage.clear();
@@ -255,6 +255,6 @@ submitButton.onclick = function (event) {
         post()
 
     } else {
-        console.error('unknown error')
+        console.error('Form validation has not passed')
     }
 }
